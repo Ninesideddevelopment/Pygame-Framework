@@ -14,3 +14,4 @@ class Window:
         
         # Create the pygame window with the specified title, size, and position
         self.pgwindow = WINDOW(title=self.title, size=self.size, position=self.position)
+        self.pgwindow.get_surface().fill((0, 0, 0))  # Fill the window with black color

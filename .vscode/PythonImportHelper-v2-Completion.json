@@ -8,30 +8,6 @@
         "documentation": {}
     },
     {
-        "label": "Vector2",
-        "importPath": "pygame.math",
-        "description": "pygame.math",
-        "isExtraImport": true,
-        "detail": "pygame.math",
-        "documentation": {}
-    },
-    {
-        "label": "Game_Object",
-        "importPath": "framework.game_object.game_object",
-        "description": "framework.game_object.game_object",
-        "isExtraImport": true,
-        "detail": "framework.game_object.game_object",
-        "documentation": {}
-    },
-    {
-        "label": "Game_Object",
-        "importPath": "framework.game_object.game_object",
-        "description": "framework.game_object.game_object",
-        "isExtraImport": true,
-        "detail": "framework.game_object.game_object",
-        "documentation": {}
-    },
-    {
         "label": "pygame",
         "kind": 6,
         "isExtraImport": true,
@@ -46,6 +22,14 @@
         "description": "pygame",
         "isExtraImport": true,
         "detail": "pygame",
+        "documentation": {}
+    },
+    {
+        "label": "Vector2",
+        "importPath": "pygame.math",
+        "description": "pygame.math",
+        "isExtraImport": true,
+        "detail": "pygame.math",
         "documentation": {}
     },
     {
@@ -78,6 +62,30 @@
         "description": "typing",
         "isExtraImport": true,
         "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "framework.components",
+        "description": "framework.components",
+        "isExtraImport": true,
+        "detail": "framework.components",
+        "documentation": {}
+    },
+    {
+        "label": "Game_Object",
+        "importPath": "framework.game_object.game_object",
+        "description": "framework.game_object.game_object",
+        "isExtraImport": true,
+        "detail": "framework.game_object.game_object",
+        "documentation": {}
+    },
+    {
+        "label": "Game_Object",
+        "importPath": "framework.game_object.game_object",
+        "description": "framework.game_object.game_object",
+        "isExtraImport": true,
+        "detail": "framework.game_object.game_object",
         "documentation": {}
     },
     {
@@ -134,7 +142,7 @@
         "kind": 6,
         "importPath": "framework.components.CFrame_component",
         "description": "framework.components.CFrame_component",
-        "peekOfCode": "class CFrame_Component(Component):\n    \"\"\"A component that represents a CFrame, which is a coordinate frame with position, rotation, and size.\"\"\"\n    def __init__(self, position: Vector2, rotation: int, size: Vector2, *args, **kwargs) -> None:\n        super().__init__(*args, **kwargs)\n        self.position: Vector2 = position\n        self.rotation: int = rotation\n        self.size: Vector2 = size\n    def set_position(self, position: Vector2) -> None:\n        \"\"\"Set the position of the CFrame.\n        \"\"\"",
+        "peekOfCode": "class CFrame_Component(Component):\n    \"\"\"A component that represents a CFrame, which is a coordinate frame with position, rotation, and size.\"\"\"\n    def __init__(self, position: Vector2 = Vector2(0, 0), rotation: int = 0, size: Vector2 = Vector2(0, 0), *args, **kwargs) -> None:\n        super().__init__(*args, **kwargs)\n        self.x: float = int(position.x)\n        self.y: float = int(position.y)\n        self.rotation: int = rotation\n        self.size: Vector2 = size\n    def set_position(self, position: Vector2) -> None:\n        \"\"\"Set the position of the CFrame.",
         "detail": "framework.components.CFrame_component",
         "documentation": {}
     },
@@ -143,7 +151,7 @@
         "kind": 6,
         "importPath": "framework.components.default_component",
         "description": "framework.components.default_component",
-        "peekOfCode": "class Component:\n    def __init__(self, game_object: Game_Object) -> None:\n        self.game_object = game_object",
+        "peekOfCode": "class Component:\n    def __init__(self, game_object: \"Game_Object\") -> None:\n        self.game_object = game_object",
         "detail": "framework.components.default_component",
         "documentation": {}
     },
@@ -188,7 +196,7 @@
         "kind": 6,
         "importPath": "framework.core.scene",
         "description": "framework.core.scene",
-        "peekOfCode": "class Scene:\n    def __init__(self, name: str) -> None:\n        from framework.containers.object_container import ObjectContainer\n        self.name = name\n        self.contents = ObjectContainer()",
+        "peekOfCode": "class Scene:\n    def __init__(self, name: str) -> None:\n        from framework.containers.object_container import ObjectContainer\n        self.name = name\n        self.contents = ObjectContainer()\n    def add_object(self, game_object):\n        \"\"\"Adds a game object to the scene.\"\"\"\n        self.contents.__setattr__(game_object.name, game_object)",
         "detail": "framework.core.scene",
         "documentation": {}
     },
@@ -197,7 +205,7 @@
         "kind": 6,
         "importPath": "framework.game_object.game_object",
         "description": "framework.game_object.game_object",
-        "peekOfCode": "class Game_Object:\n    def __init__(self, components: list[Component] = []) -> None:\n        from framework.containers.object_container import ObjectContainer\n        self.components = ObjectContainer()",
+        "peekOfCode": "class Game_Object:\n    def __init__(self, name: str, components: str = \"\") -> None:\n        from framework.containers.object_container import ObjectContainer\n        temp_components: list[str] = []\n        current_component: str = \"\"\n        for i in components:\n            if i not in [\"\", \" \", \"|\"]:\n                current_component += i\n            if i == \"|\":\n                temp_components.append(current_component)",
         "detail": "framework.game_object.game_object",
         "documentation": {}
     },
@@ -215,7 +223,7 @@
         "kind": 6,
         "importPath": "framework.windows.window",
         "description": "framework.windows.window",
-        "peekOfCode": "class Window:\n    def __init__(self, title: str, size: Tuple[int, int], position: Tuple[int, int]) -> None:\n        from framework.renderers.renderer import Renderer\n        self.size = list(size)\n        self.position = list(position)\n        self.title = title\n        self.renderer: Renderer = Renderer(window=self)\n        # Create the pygame window with the specified title, size, and position\n        self.pgwindow = WINDOW(title=self.title, size=self.size, position=self.position)",
+        "peekOfCode": "class Window:\n    def __init__(self, title: str, size: Tuple[int, int], position: Tuple[int, int]) -> None:\n        from framework.renderers.renderer import Renderer\n        self.size = list(size)\n        self.position = list(position)\n        self.title = title\n        self.renderer: Renderer = Renderer(window=self)\n        # Create the pygame window with the specified title, size, and position\n        self.pgwindow = WINDOW(title=self.title, size=self.size, position=self.position)\n        self.pgwindow.get_surface().fill((0, 0, 0))  # Fill the window with black color",
         "detail": "framework.windows.window",
         "documentation": {}
     },
@@ -233,7 +241,7 @@
         "kind": 5,
         "importPath": "tester",
         "description": "tester",
-        "peekOfCode": "winmanager = Window_Manager()\nwinmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nscene = Scene(\"Scene 1\")\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.draw_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)\n            event.window.destroy()\n        if event.type == QUIT:",
+        "peekOfCode": "winmanager = Window_Manager()\nwinmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nobj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)",
         "detail": "tester",
         "documentation": {}
     },
@@ -242,7 +250,16 @@
         "kind": 5,
         "importPath": "tester",
         "description": "tester",
-        "peekOfCode": "winmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nscene = Scene(\"Scene 1\")\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.draw_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)\n            event.window.destroy()\n        if event.type == QUIT:\n            pygame.quit()",
+        "peekOfCode": "winmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nobj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)\n            event.window.destroy()",
+        "detail": "tester",
+        "documentation": {}
+    },
+    {
+        "label": "obj",
+        "kind": 5,
+        "importPath": "tester",
+        "description": "tester",
+        "peekOfCode": "obj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)\n            event.window.destroy()\n        if event.type == QUIT:",
         "detail": "tester",
         "documentation": {}
     },
@@ -251,7 +268,7 @@
         "kind": 5,
         "importPath": "tester",
         "description": "tester",
-        "peekOfCode": "scene = Scene(\"Scene 1\")\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.draw_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)\n            event.window.destroy()\n        if event.type == QUIT:\n            pygame.quit()\n            sys.exit()",
+        "peekOfCode": "scene = Scene(\"Scene 1\")\nscene.add_object(obj)\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)\n            event.window.destroy()\n        if event.type == QUIT:\n            pygame.quit()",
         "detail": "tester",
         "documentation": {}
     }

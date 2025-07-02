@@ -1,5 +1,9 @@
-from framework.game_object.game_object import Game_Object
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from framework.game_object.game_object import Game_Object
 
 class Component:
-    def __init__(self, game_object: Game_Object) -> None:
+    def __init__(self, game_object: "Game_Object") -> None:
         self.game_object = game_object

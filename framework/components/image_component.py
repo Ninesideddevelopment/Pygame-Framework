@@ -16,4 +16,4 @@ class Image_Component(Component):
             self.image = self.image.convert_alpha()
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(self.image, (self.game_object, self.game_object))
+        surface.blit(self.image, (self.game_object.components["CFrame_Component"].x, self.game_object.components["CFrame_Component"].y))
