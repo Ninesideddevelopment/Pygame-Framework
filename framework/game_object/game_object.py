@@ -18,4 +18,4 @@ class Game_Object:
         
         for component in temp_components:
             if component != "":
-                self.components.__setattr__(component.__type__, component)
+                self.components.__setattr__(eval(component).__type__, component)
