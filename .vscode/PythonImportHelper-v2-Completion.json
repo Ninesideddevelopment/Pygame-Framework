@@ -1,0 +1,258 @@
+[
+    {
+        "label": "Component",
+        "importPath": "framework.components.default_component",
+        "description": "framework.components.default_component",
+        "isExtraImport": true,
+        "detail": "framework.components.default_component",
+        "documentation": {}
+    },
+    {
+        "label": "Vector2",
+        "importPath": "pygame.math",
+        "description": "pygame.math",
+        "isExtraImport": true,
+        "detail": "pygame.math",
+        "documentation": {}
+    },
+    {
+        "label": "Game_Object",
+        "importPath": "framework.game_object.game_object",
+        "description": "framework.game_object.game_object",
+        "isExtraImport": true,
+        "detail": "framework.game_object.game_object",
+        "documentation": {}
+    },
+    {
+        "label": "Game_Object",
+        "importPath": "framework.game_object.game_object",
+        "description": "framework.game_object.game_object",
+        "isExtraImport": true,
+        "detail": "framework.game_object.game_object",
+        "documentation": {}
+    },
+    {
+        "label": "pygame",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pygame",
+        "description": "pygame",
+        "detail": "pygame",
+        "documentation": {}
+    },
+    {
+        "label": "Window",
+        "importPath": "pygame",
+        "description": "pygame",
+        "isExtraImport": true,
+        "detail": "pygame",
+        "documentation": {}
+    },
+    {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Window",
+        "importPath": "framework.windows.window",
+        "description": "framework.windows.window",
+        "isExtraImport": true,
+        "detail": "framework.windows.window",
+        "documentation": {}
+    },
+    {
+        "label": "Window",
+        "importPath": "framework.windows.window",
+        "description": "framework.windows.window",
+        "isExtraImport": true,
+        "detail": "framework.windows.window",
+        "documentation": {}
+    },
+    {
+        "label": "Window_Manager",
+        "importPath": "framework.windows.window_manager",
+        "description": "framework.windows.window_manager",
+        "isExtraImport": true,
+        "detail": "framework.windows.window_manager",
+        "documentation": {}
+    },
+    {
+        "label": "Scene",
+        "importPath": "framework.core.scene",
+        "description": "framework.core.scene",
+        "isExtraImport": true,
+        "detail": "framework.core.scene",
+        "documentation": {}
+    },
+    {
+        "label": "pygame,",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pygame.",
+        "description": "pygame.",
+        "detail": "pygame.",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "pygame.locals",
+        "description": "pygame.locals",
+        "isExtraImport": true,
+        "detail": "pygame.locals",
+        "documentation": {}
+    },
+    {
+        "label": "CFrame_Component",
+        "kind": 6,
+        "importPath": "framework.components.CFrame_component",
+        "description": "framework.components.CFrame_component",
+        "peekOfCode": "class CFrame_Component(Component):\n    \"\"\"A component that represents a CFrame, which is a coordinate frame with position, rotation, and size.\"\"\"\n    def __init__(self, position: Vector2, rotation: int, size: Vector2, *args, **kwargs) -> None:\n        super().__init__(*args, **kwargs)\n        self.position: Vector2 = position\n        self.rotation: int = rotation\n        self.size: Vector2 = size\n    def set_position(self, position: Vector2) -> None:\n        \"\"\"Set the position of the CFrame.\n        \"\"\"",
+        "detail": "framework.components.CFrame_component",
+        "documentation": {}
+    },
+    {
+        "label": "Component",
+        "kind": 6,
+        "importPath": "framework.components.default_component",
+        "description": "framework.components.default_component",
+        "peekOfCode": "class Component:\n    def __init__(self, game_object: Game_Object) -> None:\n        self.game_object = game_object",
+        "detail": "framework.components.default_component",
+        "documentation": {}
+    },
+    {
+        "label": "Image_Component",
+        "kind": 6,
+        "importPath": "framework.components.image_component",
+        "description": "framework.components.image_component",
+        "peekOfCode": "class Image_Component(Component):\n    \"\"\"A component that represents an image for a game object, which can be rendered on a surface.\"\"\"\n    def __init__(self, image_path: str, *args, **kwargs) -> None:\n        super().__init__(*args, **kwargs)\n        self.image_path = image_path\n        self.image = pygame.image.load(image_path)\n        if self.image.get_alpha() is None:\n            self.image = self.image.convert()\n        else:\n            self.image = self.image.convert_alpha()",
+        "detail": "framework.components.image_component",
+        "documentation": {}
+    },
+    {
+        "label": "ComponentContainer",
+        "kind": 6,
+        "importPath": "framework.containers.component_container",
+        "description": "framework.containers.component_container",
+        "peekOfCode": "class ComponentContainer(DefaultContainer):\n    \"\"\"A class created specifically to hold components for game objects, to avoid messy attributes.\"\"\"\n    def __init__(self, *args, **kwargs) -> None:\n        super().__init__(*args, **kwargs)",
+        "detail": "framework.containers.component_container",
+        "documentation": {}
+    },
+    {
+        "label": "DefaultContainer",
+        "kind": 6,
+        "importPath": "framework.containers.default_container",
+        "description": "framework.containers.default_container",
+        "peekOfCode": "class DefaultContainer:\n    \"\"\"A class created specifically to hold objects for other classes, to avoid messy attributes.\"\"\"\n    def __init__(self) -> None:\n        pass",
+        "detail": "framework.containers.default_container",
+        "documentation": {}
+    },
+    {
+        "label": "ObjectContainer",
+        "kind": 6,
+        "importPath": "framework.containers.object_container",
+        "description": "framework.containers.object_container",
+        "peekOfCode": "class ObjectContainer(DefaultContainer):\n    \"\"\"A class created specifically to hold game objects for other classes, to avoid messy attributes.\"\"\"\n    def __init__(self, *args, **kwargs) -> None:\n        super().__init__(*args, **kwargs)",
+        "detail": "framework.containers.object_container",
+        "documentation": {}
+    },
+    {
+        "label": "Scene",
+        "kind": 6,
+        "importPath": "framework.core.scene",
+        "description": "framework.core.scene",
+        "peekOfCode": "class Scene:\n    def __init__(self, name: str) -> None:\n        from framework.containers.object_container import ObjectContainer\n        self.name = name\n        self.contents = ObjectContainer()",
+        "detail": "framework.core.scene",
+        "documentation": {}
+    },
+    {
+        "label": "Game_Object",
+        "kind": 6,
+        "importPath": "framework.game_object.game_object",
+        "description": "framework.game_object.game_object",
+        "peekOfCode": "class Game_Object:\n    def __init__(self, components: list[Component] = []) -> None:\n        from framework.containers.object_container import ObjectContainer\n        self.components = ObjectContainer()",
+        "detail": "framework.game_object.game_object",
+        "documentation": {}
+    },
+    {
+        "label": "Renderer",
+        "kind": 6,
+        "importPath": "framework.renderers.renderer",
+        "description": "framework.renderers.renderer",
+        "peekOfCode": "class Renderer:\n    def __init__(self, window: \"Window\") -> None:\n        self.window = window\n    def fill(self, color: tuple[int, int, int]) -> None:\n        self.window.pgwindow.get_surface().fill(color)\n    def update(self) -> None:\n        self.window.pgwindow.flip()\n    def render_scene(self, scene: \"Scene\") -> None:\n        print(scene.contents.__dict__)\n        for game_object in scene.contents.__dict__.values():",
+        "detail": "framework.renderers.renderer",
+        "documentation": {}
+    },
+    {
+        "label": "Window",
+        "kind": 6,
+        "importPath": "framework.windows.window",
+        "description": "framework.windows.window",
+        "peekOfCode": "class Window:\n    def __init__(self, title: str, size: Tuple[int, int], position: Tuple[int, int]) -> None:\n        from framework.renderers.renderer import Renderer\n        self.size = list(size)\n        self.position = list(position)\n        self.title = title\n        self.renderer: Renderer = Renderer(window=self)\n        # Create the pygame window with the specified title, size, and position\n        self.pgwindow = WINDOW(title=self.title, size=self.size, position=self.position)",
+        "detail": "framework.windows.window",
+        "documentation": {}
+    },
+    {
+        "label": "Window_Manager",
+        "kind": 6,
+        "importPath": "framework.windows.window_manager",
+        "description": "framework.windows.window_manager",
+        "peekOfCode": "class Window_Manager:\n    def __init__(self):\n        from framework.containers.object_container import ObjectContainer\n        self.windows = ObjectContainer()\n    def add_window(self, window: 'Window') -> None:\n        setattr(self.windows, window.title, window)\n    def remove_window(self, title: str) -> None:\n        if hasattr(self.windows, title):\n            delattr(self.windows, title)\n    def get_window(self, title: str) -> tuple[bool, Window | None]:",
+        "detail": "framework.windows.window_manager",
+        "documentation": {}
+    },
+    {
+        "label": "winmanager",
+        "kind": 5,
+        "importPath": "tester",
+        "description": "tester",
+        "peekOfCode": "winmanager = Window_Manager()\nwinmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nscene = Scene(\"Scene 1\")\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.draw_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)\n            event.window.destroy()\n        if event.type == QUIT:",
+        "detail": "tester",
+        "documentation": {}
+    },
+    {
+        "label": "winmanager.add_window(window",
+        "kind": 5,
+        "importPath": "tester",
+        "description": "tester",
+        "peekOfCode": "winmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nscene = Scene(\"Scene 1\")\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.draw_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)\n            event.window.destroy()\n        if event.type == QUIT:\n            pygame.quit()",
+        "detail": "tester",
+        "documentation": {}
+    },
+    {
+        "label": "scene",
+        "kind": 5,
+        "importPath": "tester",
+        "description": "tester",
+        "peekOfCode": "scene = Scene(\"Scene 1\")\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.draw_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)\n            event.window.destroy()\n        if event.type == QUIT:\n            pygame.quit()\n            sys.exit()",
+        "detail": "tester",
+        "documentation": {}
+    }
+]
