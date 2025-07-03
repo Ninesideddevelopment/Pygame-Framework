@@ -1,5 +1,7 @@
 from framework.components import *
 
+from pygame.math import Vector2
+
 class Game_Object:
     def __init__(self, name: str, components: str = "") -> None:
         from framework.containers.object_container import ObjectContainer
@@ -18,4 +20,4 @@ class Game_Object:
         
         for component in temp_components:
             if component != "":
-                self.components.__setattr__(eval(component).__type__, component)
+                self.components.__setattr__(eval(component).__class__.__name__, eval(component))

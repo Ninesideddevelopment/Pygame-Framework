@@ -8,20 +8,19 @@
         "documentation": {}
     },
     {
-        "label": "pygame",
-        "kind": 6,
+        "label": "Vector2",
+        "importPath": "pygame.math",
+        "description": "pygame.math",
         "isExtraImport": true,
-        "importPath": "pygame",
-        "description": "pygame",
-        "detail": "pygame",
+        "detail": "pygame.math",
         "documentation": {}
     },
     {
-        "label": "Window",
-        "importPath": "pygame",
-        "description": "pygame",
+        "label": "Vector2",
+        "importPath": "pygame.math",
+        "description": "pygame.math",
         "isExtraImport": true,
-        "detail": "pygame",
+        "detail": "pygame.math",
         "documentation": {}
     },
     {
@@ -62,6 +61,23 @@
         "description": "typing",
         "isExtraImport": true,
         "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "pygame",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pygame",
+        "description": "pygame",
+        "detail": "pygame",
+        "documentation": {}
+    },
+    {
+        "label": "Window",
+        "importPath": "pygame",
+        "description": "pygame",
+        "isExtraImport": true,
+        "detail": "pygame",
         "documentation": {}
     },
     {
@@ -142,7 +158,7 @@
         "kind": 6,
         "importPath": "framework.components.CFrame_component",
         "description": "framework.components.CFrame_component",
-        "peekOfCode": "class CFrame_Component(Component):\n    \"\"\"A component that represents a CFrame, which is a coordinate frame with position, rotation, and size.\"\"\"\n    def __init__(self, position: Vector2 = Vector2(0, 0), rotation: int = 0, size: Vector2 = Vector2(0, 0), *args, **kwargs) -> None:\n        super().__init__(*args, **kwargs)\n        self.x: float = int(position.x)\n        self.y: float = int(position.y)\n        self.rotation: int = rotation\n        self.size: Vector2 = size\n    def set_position(self, position: Vector2) -> None:\n        \"\"\"Set the position of the CFrame.",
+        "peekOfCode": "class CFrame_Component(Component):\n    \"\"\"A component that represents a CFrame, which is a coordinate frame with position, rotation, and size.\"\"\"\n    def __init__(self, position: Vector2 = Vector2(0, 0), rotation: int = 0, size: Vector2 = Vector2(0, 0), *args, **kwargs) -> None:\n        from pygame.math import Vector2\n        super().__init__(*args, **kwargs)\n        self.x: float = int(position.x)\n        self.y: float = int(position.y)\n        self.rotation: int = rotation\n        self.size: Vector2 = size\n    def set_position(self, position: Vector2) -> None:",
         "detail": "framework.components.CFrame_component",
         "documentation": {}
     },
@@ -214,7 +230,7 @@
         "kind": 6,
         "importPath": "framework.renderers.renderer",
         "description": "framework.renderers.renderer",
-        "peekOfCode": "class Renderer:\n    def __init__(self, window: \"Window\") -> None:\n        self.window = window\n    def fill(self, color: tuple[int, int, int]) -> None:\n        self.window.pgwindow.get_surface().fill(color)\n    def update(self) -> None:\n        self.window.pgwindow.flip()\n    def render_scene(self, scene: \"Scene\") -> None:\n        print(scene.contents.__dict__)\n        for game_object in scene.contents.__dict__.values():",
+        "peekOfCode": "class Renderer:\n    def __init__(self, window: \"Window\") -> None:\n        self.window = window\n    def fill(self, color: tuple[int, int, int]) -> None:\n        self.window.pgwindow.get_surface().fill(color)\n    def update(self) -> None:\n        self.window.pgwindow.flip()\n    def render_scene(self, scene: \"Scene\") -> None:\n        for game_object in scene.contents.__dict__.values():\n            game_object.components.__dict__[\"Image_Component\"].render(self.window.pgwindow.get_surface())",
         "detail": "framework.renderers.renderer",
         "documentation": {}
     },
@@ -237,11 +253,20 @@
         "documentation": {}
     },
     {
+        "label": "clock",
+        "kind": 5,
+        "importPath": "tester",
+        "description": "tester",
+        "peekOfCode": "clock = pygame.time.Clock()\nwinmanager = Window_Manager()\nwinmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nobj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nobj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nscene.add_object(obj2)\nwhile True:\n    for win in winmanager.get_all_windows().values():",
+        "detail": "tester",
+        "documentation": {}
+    },
+    {
         "label": "winmanager",
         "kind": 5,
         "importPath": "tester",
         "description": "tester",
-        "peekOfCode": "winmanager = Window_Manager()\nwinmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nobj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)",
+        "peekOfCode": "winmanager = Window_Manager()\nwinmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nobj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nobj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nscene.add_object(obj2)\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))",
         "detail": "tester",
         "documentation": {}
     },
@@ -250,7 +275,7 @@
         "kind": 5,
         "importPath": "tester",
         "description": "tester",
-        "peekOfCode": "winmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nobj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)\n            event.window.destroy()",
+        "peekOfCode": "winmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nobj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nobj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nscene.add_object(obj2)\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))\n    winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene)",
         "detail": "tester",
         "documentation": {}
     },
@@ -259,7 +284,16 @@
         "kind": 5,
         "importPath": "tester",
         "description": "tester",
-        "peekOfCode": "obj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)\n            event.window.destroy()\n        if event.type == QUIT:",
+        "peekOfCode": "obj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nobj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nscene.add_object(obj2)\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))\n    winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene)\n    obj.components.CFrame_Component.x += 1",
+        "detail": "tester",
+        "documentation": {}
+    },
+    {
+        "label": "obj2",
+        "kind": 5,
+        "importPath": "tester",
+        "description": "tester",
+        "peekOfCode": "obj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nscene.add_object(obj2)\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))\n    winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene)\n    obj.components.CFrame_Component.x += 1\n    obj2.components.CFrame_Component.y += 1",
         "detail": "tester",
         "documentation": {}
     },
@@ -268,7 +302,7 @@
         "kind": 5,
         "importPath": "tester",
         "description": "tester",
-        "peekOfCode": "scene = Scene(\"Scene 1\")\nscene.add_object(obj)\nwhile True:\n    print(winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene))\n    for event in pygame.event.get():\n        if event.type == pygame.WINDOWCLOSE:\n            winmanager.remove_window(title=event.window.title)\n            event.window.destroy()\n        if event.type == QUIT:\n            pygame.quit()",
+        "peekOfCode": "scene = Scene(\"Scene 1\")\nscene.add_object(obj)\nscene.add_object(obj2)\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))\n    winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene)\n    obj.components.CFrame_Component.x += 1\n    obj2.components.CFrame_Component.y += 1\n    for event in pygame.event.get():",
         "detail": "tester",
         "documentation": {}
     }

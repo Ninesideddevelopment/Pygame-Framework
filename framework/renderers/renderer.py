@@ -18,6 +18,5 @@ class Renderer:
         self.window.pgwindow.flip()
         
     def render_scene(self, scene: "Scene") -> None:
-        print(scene.contents.__dict__)
         for game_object in scene.contents.__dict__.values():
             game_object.components.__dict__["Image_Component"].render(self.window.pgwindow.get_surface())
