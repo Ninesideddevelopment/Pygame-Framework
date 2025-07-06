@@ -1,9 +1,8 @@
 from framework.components import *
 
-from pygame.math import Vector2
-
 class Game_Object:
     def __init__(self, name: str, components: str = "") -> None:
+        from pygame.math import Vector2
         from framework.containers.object_container import ObjectContainer
         
         temp_components: list[str] = []

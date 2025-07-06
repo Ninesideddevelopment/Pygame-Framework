@@ -16,22 +16,6 @@
         "documentation": {}
     },
     {
-        "label": "Vector2",
-        "importPath": "pygame.math",
-        "description": "pygame.math",
-        "isExtraImport": true,
-        "detail": "pygame.math",
-        "documentation": {}
-    },
-    {
-        "label": "Vector2",
-        "importPath": "pygame.math",
-        "description": "pygame.math",
-        "isExtraImport": true,
-        "detail": "pygame.math",
-        "documentation": {}
-    },
-    {
         "label": "TYPE_CHECKING",
         "importPath": "typing",
         "description": "typing",
@@ -81,43 +65,11 @@
         "documentation": {}
     },
     {
-        "label": "*",
-        "importPath": "framework.components",
-        "description": "framework.components",
+        "label": "return_flags",
+        "importPath": "framework.underhood.flags_handler",
+        "description": "framework.underhood.flags_handler",
         "isExtraImport": true,
-        "detail": "framework.components",
-        "documentation": {}
-    },
-    {
-        "label": "Game_Object",
-        "importPath": "framework.game_object.game_object",
-        "description": "framework.game_object.game_object",
-        "isExtraImport": true,
-        "detail": "framework.game_object.game_object",
-        "documentation": {}
-    },
-    {
-        "label": "Game_Object",
-        "importPath": "framework.game_object.game_object",
-        "description": "framework.game_object.game_object",
-        "isExtraImport": true,
-        "detail": "framework.game_object.game_object",
-        "documentation": {}
-    },
-    {
-        "label": "Window",
-        "importPath": "framework.windows.window",
-        "description": "framework.windows.window",
-        "isExtraImport": true,
-        "detail": "framework.windows.window",
-        "documentation": {}
-    },
-    {
-        "label": "Window",
-        "importPath": "framework.windows.window",
-        "description": "framework.windows.window",
-        "isExtraImport": true,
-        "detail": "framework.windows.window",
+        "detail": "framework.underhood.flags_handler",
         "documentation": {}
     },
     {
@@ -129,11 +81,19 @@
         "documentation": {}
     },
     {
-        "label": "Scene",
-        "importPath": "framework.core.scene",
-        "description": "framework.core.scene",
+        "label": "Window_Manager",
+        "importPath": "framework.windows.window_manager",
+        "description": "framework.windows.window_manager",
         "isExtraImport": true,
-        "detail": "framework.core.scene",
+        "detail": "framework.windows.window_manager",
+        "documentation": {}
+    },
+    {
+        "label": "Window_Manager",
+        "importPath": "framework.windows.window_manager",
+        "description": "framework.windows.window_manager",
+        "isExtraImport": true,
+        "detail": "framework.windows.window_manager",
         "documentation": {}
     },
     {
@@ -143,6 +103,70 @@
         "importPath": "pygame.",
         "description": "pygame.",
         "detail": "pygame.",
+        "documentation": {}
+    },
+    {
+        "label": "Game_Object",
+        "importPath": "framework.game_object.game_object",
+        "description": "framework.game_object.game_object",
+        "isExtraImport": true,
+        "detail": "framework.game_object.game_object",
+        "documentation": {}
+    },
+    {
+        "label": "Game_Object",
+        "importPath": "framework.game_object.game_object",
+        "description": "framework.game_object.game_object",
+        "isExtraImport": true,
+        "detail": "framework.game_object.game_object",
+        "documentation": {}
+    },
+    {
+        "label": "Game_Object",
+        "importPath": "framework.game_object.game_object",
+        "description": "framework.game_object.game_object",
+        "isExtraImport": true,
+        "detail": "framework.game_object.game_object",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "framework.components",
+        "description": "framework.components",
+        "isExtraImport": true,
+        "detail": "framework.components",
+        "documentation": {}
+    },
+    {
+        "label": "Window",
+        "importPath": "framework.windows.window",
+        "description": "framework.windows.window",
+        "isExtraImport": true,
+        "detail": "framework.windows.window",
+        "documentation": {}
+    },
+    {
+        "label": "Window",
+        "importPath": "framework.windows.window",
+        "description": "framework.windows.window",
+        "isExtraImport": true,
+        "detail": "framework.windows.window",
+        "documentation": {}
+    },
+    {
+        "label": "Scene",
+        "importPath": "framework.core.scene",
+        "description": "framework.core.scene",
+        "isExtraImport": true,
+        "detail": "framework.core.scene",
+        "documentation": {}
+    },
+    {
+        "label": "Events_Handler",
+        "importPath": "framework.core.events_handler",
+        "description": "framework.core.events_handler",
+        "isExtraImport": true,
+        "detail": "framework.core.events_handler",
         "documentation": {}
     },
     {
@@ -181,6 +205,15 @@
         "documentation": {}
     },
     {
+        "label": "Velocity_Component",
+        "kind": 6,
+        "importPath": "framework.components.velocity_component",
+        "description": "framework.components.velocity_component",
+        "peekOfCode": "class Velocity_Component:\n    \"\"\"\n    A component that manages the velocity of a game object.\n    \"\"\"\n    def __init__(self, x: float = 0.0, y: float = 0.0) -> None:\n        self.x = x\n        self.y = y",
+        "detail": "framework.components.velocity_component",
+        "documentation": {}
+    },
+    {
         "label": "ComponentContainer",
         "kind": 6,
         "importPath": "framework.containers.component_container",
@@ -208,11 +241,29 @@
         "documentation": {}
     },
     {
+        "label": "Events_Handler",
+        "kind": 6,
+        "importPath": "framework.core.events_handler",
+        "description": "framework.core.events_handler",
+        "peekOfCode": "class Events_Handler:\n    def __init__(self) -> None:\n        self.KeyCodes: dict(\"key\", \"value\") = {}\n    def handle_events(self, window_manager: Window_Manager, flags: str = \"WINDOWCLOSE | QUIT\") -> None:\n        flags_list = return_flags(flags=flags)\n        for event in pygame.event.get():\n            if event.type == pygame.WINDOWCLOSE and \"WINDOWCLOSE\" in flags_list:\n                window_manager.remove_window(event.window.title)\n                event.window.destroy()\n            if event.type == pygame.QUIT and \"QUIT\" in flags_list:",
+        "detail": "framework.core.events_handler",
+        "documentation": {}
+    },
+    {
+        "label": "RunTime",
+        "kind": 6,
+        "importPath": "framework.core.runtime",
+        "description": "framework.core.runtime",
+        "peekOfCode": "class RunTime:\n    \"\"\"\n    The RunTime class is responsible for managing the game loop and rendering the game scene.\n    It initializes the game window, handles events, and updates the game state.\n    \"\"\"\n    def __init__(self, winmanager: Window_Manager) -> None:\n        self.winmanager = winmanager\n    def run(self):\n        while True:\n            for win in self.winmanager.get_all_windows().values():",
+        "detail": "framework.core.runtime",
+        "documentation": {}
+    },
+    {
         "label": "Scene",
         "kind": 6,
         "importPath": "framework.core.scene",
         "description": "framework.core.scene",
-        "peekOfCode": "class Scene:\n    def __init__(self, name: str) -> None:\n        from framework.containers.object_container import ObjectContainer\n        self.name = name\n        self.contents = ObjectContainer()\n    def add_object(self, game_object):\n        \"\"\"Adds a game object to the scene.\"\"\"\n        self.contents.__setattr__(game_object.name, game_object)",
+        "peekOfCode": "class Scene:\n    def __init__(self, name: str) -> None:\n        from framework.containers.object_container import ObjectContainer\n        self.name = name\n        self.contents = ObjectContainer()\n    def add_object(self, game_object: 'Game_Object') -> None:\n        \"\"\"Adds a game object to the scene.\"\"\"\n        self.contents.__setattr__(game_object.name, game_object)",
         "detail": "framework.core.scene",
         "documentation": {}
     },
@@ -221,7 +272,7 @@
         "kind": 6,
         "importPath": "framework.game_object.game_object",
         "description": "framework.game_object.game_object",
-        "peekOfCode": "class Game_Object:\n    def __init__(self, name: str, components: str = \"\") -> None:\n        from framework.containers.object_container import ObjectContainer\n        temp_components: list[str] = []\n        current_component: str = \"\"\n        for i in components:\n            if i not in [\"\", \" \", \"|\"]:\n                current_component += i\n            if i == \"|\":\n                temp_components.append(current_component)",
+        "peekOfCode": "class Game_Object:\n    def __init__(self, name: str, components: str = \"\") -> None:\n        from pygame.math import Vector2\n        from framework.containers.object_container import ObjectContainer\n        temp_components: list[str] = []\n        current_component: str = \"\"\n        for i in components:\n            if i not in [\"\", \" \", \"|\"]:\n                current_component += i\n            if i == \"|\":",
         "detail": "framework.game_object.game_object",
         "documentation": {}
     },
@@ -232,6 +283,15 @@
         "description": "framework.renderers.renderer",
         "peekOfCode": "class Renderer:\n    def __init__(self, window: \"Window\") -> None:\n        self.window = window\n    def fill(self, color: tuple[int, int, int]) -> None:\n        self.window.pgwindow.get_surface().fill(color)\n    def update(self) -> None:\n        self.window.pgwindow.flip()\n    def render_scene(self, scene: \"Scene\") -> None:\n        for game_object in scene.contents.__dict__.values():\n            game_object.components.__dict__[\"Image_Component\"].render(self.window.pgwindow.get_surface())",
         "detail": "framework.renderers.renderer",
+        "documentation": {}
+    },
+    {
+        "label": "return_flags",
+        "kind": 2,
+        "importPath": "framework.underhood.flags_handler",
+        "description": "framework.underhood.flags_handler",
+        "peekOfCode": "def return_flags(flags: str) -> list[str]:\n    \"\"\"\n    Returns a list of flags from a string.\n    Args:\n        flags (str): A string containing flags separated by '|'.\n    Returns:\n        list[str]: A list of flags.\n    \"\"\"\n    return [flag.strip() for flag in flags.split('|') if flag.strip()] if flags else []",
+        "detail": "framework.underhood.flags_handler",
         "documentation": {}
     },
     {
@@ -257,7 +317,7 @@
         "kind": 5,
         "importPath": "tester",
         "description": "tester",
-        "peekOfCode": "clock = pygame.time.Clock()\nwinmanager = Window_Manager()\nwinmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nobj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nobj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nscene.add_object(obj2)\nwhile True:\n    for win in winmanager.get_all_windows().values():",
+        "peekOfCode": "clock = pygame.time.Clock()\nwinmanager = Window_Manager()\nwinmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nobj1 = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) | Velocity_Component() |\")\nobj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj1)\nscene.add_object(obj2)\nev_handler = Events_Handler()\nwhile True:",
         "detail": "tester",
         "documentation": {}
     },
@@ -266,7 +326,7 @@
         "kind": 5,
         "importPath": "tester",
         "description": "tester",
-        "peekOfCode": "winmanager = Window_Manager()\nwinmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nobj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nobj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nscene.add_object(obj2)\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))",
+        "peekOfCode": "winmanager = Window_Manager()\nwinmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nobj1 = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) | Velocity_Component() |\")\nobj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj1)\nscene.add_object(obj2)\nev_handler = Events_Handler()\nwhile True:\n    for win in winmanager.get_all_windows().values():",
         "detail": "tester",
         "documentation": {}
     },
@@ -275,16 +335,16 @@
         "kind": 5,
         "importPath": "tester",
         "description": "tester",
-        "peekOfCode": "winmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nobj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nobj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nscene.add_object(obj2)\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))\n    winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene)",
+        "peekOfCode": "winmanager.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nobj1 = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) | Velocity_Component() |\")\nobj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj1)\nscene.add_object(obj2)\nev_handler = Events_Handler()\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))",
         "detail": "tester",
         "documentation": {}
     },
     {
-        "label": "obj",
+        "label": "obj1",
         "kind": 5,
         "importPath": "tester",
         "description": "tester",
-        "peekOfCode": "obj = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) |\")\nobj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nscene.add_object(obj2)\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))\n    winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene)\n    obj.components.CFrame_Component.x += 1",
+        "peekOfCode": "obj1 = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) | Velocity_Component() |\")\nobj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj1)\nscene.add_object(obj2)\nev_handler = Events_Handler()\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))\n    winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene)",
         "detail": "tester",
         "documentation": {}
     },
@@ -293,7 +353,7 @@
         "kind": 5,
         "importPath": "tester",
         "description": "tester",
-        "peekOfCode": "obj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj)\nscene.add_object(obj2)\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))\n    winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene)\n    obj.components.CFrame_Component.x += 1\n    obj2.components.CFrame_Component.y += 1",
+        "peekOfCode": "obj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nscene = Scene(\"Scene 1\")\nscene.add_object(obj1)\nscene.add_object(obj2)\nev_handler = Events_Handler()\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))\n    winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene)\n    obj1.components.Velocity_Component.x += 0.25",
         "detail": "tester",
         "documentation": {}
     },
@@ -302,7 +362,16 @@
         "kind": 5,
         "importPath": "tester",
         "description": "tester",
-        "peekOfCode": "scene = Scene(\"Scene 1\")\nscene.add_object(obj)\nscene.add_object(obj2)\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))\n    winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene)\n    obj.components.CFrame_Component.x += 1\n    obj2.components.CFrame_Component.y += 1\n    for event in pygame.event.get():",
+        "peekOfCode": "scene = Scene(\"Scene 1\")\nscene.add_object(obj1)\nscene.add_object(obj2)\nev_handler = Events_Handler()\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))\n    winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene)\n    obj1.components.Velocity_Component.x += 0.25\n    obj1.components.Velocity_Component.y += 0.25",
+        "detail": "tester",
+        "documentation": {}
+    },
+    {
+        "label": "ev_handler",
+        "kind": 5,
+        "importPath": "tester",
+        "description": "tester",
+        "peekOfCode": "ev_handler = Events_Handler()\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))\n    winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene)\n    obj1.components.Velocity_Component.x += 0.25\n    obj1.components.Velocity_Component.y += 0.25\n    obj1.components.CFrame_Component.x += obj1.components.Velocity_Component.x\n    obj1.components.CFrame_Component.y += obj1.components.Velocity_Component.y\n    obj2.components.CFrame_Component.x += 1",
         "detail": "tester",
         "documentation": {}
     }
