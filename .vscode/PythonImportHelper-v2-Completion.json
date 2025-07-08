@@ -32,6 +32,14 @@
         "documentation": {}
     },
     {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "Tuple",
         "importPath": "typing",
         "description": "typing",
@@ -62,6 +70,22 @@
         "description": "pygame",
         "isExtraImport": true,
         "detail": "pygame",
+        "documentation": {}
+    },
+    {
+        "label": "StartUp",
+        "importPath": "framework.core.startup_class",
+        "description": "framework.core.startup_class",
+        "isExtraImport": true,
+        "detail": "framework.core.startup_class",
+        "documentation": {}
+    },
+    {
+        "label": "RunTime",
+        "importPath": "framework.core.runtime",
+        "description": "framework.core.runtime",
+        "isExtraImport": true,
+        "detail": "framework.core.runtime",
         "documentation": {}
     },
     {
@@ -171,6 +195,14 @@
     },
     {
         "label": "*",
+        "importPath": "framework",
+        "description": "framework",
+        "isExtraImport": true,
+        "detail": "framework",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "pygame.locals",
         "description": "pygame.locals",
         "isExtraImport": true,
@@ -241,6 +273,15 @@
         "documentation": {}
     },
     {
+        "label": "Engine",
+        "kind": 6,
+        "importPath": "framework.core.engine_class",
+        "description": "framework.core.engine_class",
+        "peekOfCode": "class Engine:\n    def __init__(self) -> None:\n        self.startup = StartUp(self)\n        self.runtime = RunTime()",
+        "detail": "framework.core.engine_class",
+        "documentation": {}
+    },
+    {
         "label": "Events_Handler",
         "kind": 6,
         "importPath": "framework.core.events_handler",
@@ -265,6 +306,15 @@
         "description": "framework.core.scene",
         "peekOfCode": "class Scene:\n    def __init__(self, name: str) -> None:\n        from framework.containers.object_container import ObjectContainer\n        self.name = name\n        self.contents = ObjectContainer()\n    def add_object(self, game_object: 'Game_Object') -> None:\n        \"\"\"Adds a game object to the scene.\"\"\"\n        self.contents.__setattr__(game_object.name, game_object)",
         "detail": "framework.core.scene",
+        "documentation": {}
+    },
+    {
+        "label": "StartUp",
+        "kind": 6,
+        "importPath": "framework.core.startup_class",
+        "description": "framework.core.startup_class",
+        "peekOfCode": "class StartUp:\n    def __init__(self, engine: \"Engine\") -> None:\n        self.engine = engine\n    def initialize(self):\n        \"\"\"\n        Initialize the game engine.\n        This method should be called before starting the game loop.\n        \"\"\"\n        # Perform any necessary setup here, such as loading resources, initializing subsystems, etc.\n        print(\"Game engine initialized.\")",
+        "detail": "framework.core.startup_class",
         "documentation": {}
     },
     {

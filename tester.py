@@ -3,6 +3,8 @@ from framework.windows.window_manager import Window_Manager
 from framework.core.scene import Scene
 from framework.core.events_handler import Events_Handler
 
+from framework import *
+
 import pygame
 pygame.init()
 from pygame.locals import *
