@@ -1,5 +1,9 @@
 
-from framework.windows.window_manager import Window_Manager
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from framework.windows.window_manager import Window_Manager
+    from framework.core.engine_class import Engine
 
 class RunTime:
     """
@@ -7,7 +11,7 @@ class RunTime:
     It initializes the game window, handles events, and updates the game state.
     """
 
-    def __init__(self, winmanager: Window_Manager) -> None:
+    def __init__(self, winmanager: "Window_Manager", engine: "Engine", runtimefile: str) -> None:
         self.winmanager = winmanager
 
     def run(self):

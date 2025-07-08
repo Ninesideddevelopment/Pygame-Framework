@@ -40,6 +40,14 @@
         "documentation": {}
     },
     {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "Tuple",
         "importPath": "typing",
         "description": "typing",
@@ -82,10 +90,10 @@
     },
     {
         "label": "RunTime",
-        "importPath": "framework.core.runtime",
-        "description": "framework.core.runtime",
+        "importPath": "framework.core.runtime_class",
+        "description": "framework.core.runtime_class",
         "isExtraImport": true,
-        "detail": "framework.core.runtime",
+        "detail": "framework.core.runtime_class",
         "documentation": {}
     },
     {
@@ -94,14 +102,6 @@
         "description": "framework.underhood.flags_handler",
         "isExtraImport": true,
         "detail": "framework.underhood.flags_handler",
-        "documentation": {}
-    },
-    {
-        "label": "Window_Manager",
-        "importPath": "framework.windows.window_manager",
-        "description": "framework.windows.window_manager",
-        "isExtraImport": true,
-        "detail": "framework.windows.window_manager",
         "documentation": {}
     },
     {
@@ -210,6 +210,14 @@
         "documentation": {}
     },
     {
+        "label": "Engine",
+        "importPath": "framework.core.engine_class",
+        "description": "framework.core.engine_class",
+        "isExtraImport": true,
+        "detail": "framework.core.engine_class",
+        "documentation": {}
+    },
+    {
         "label": "CFrame_Component",
         "kind": 6,
         "importPath": "framework.components.CFrame_component",
@@ -277,7 +285,7 @@
         "kind": 6,
         "importPath": "framework.core.engine_class",
         "description": "framework.core.engine_class",
-        "peekOfCode": "class Engine:\n    def __init__(self) -> None:\n        self.startup = StartUp(self)\n        self.runtime = RunTime()",
+        "peekOfCode": "class Engine:\n    def __init__(self, startupfile: str, runtimefile: str) -> None:\n        self.startup = StartUp(engine=self, startupfile=startupfile)\n        #self.runtime = RunTime(engine=self, runtimefile=runtimefile)\n    def play(self):\n        \"\"\"\n        Starts the game engine by initializing the startup process and running the runtime loop.\n        \"\"\"\n        self.startup.initialize()\n        #self.runtime.run()",
         "detail": "framework.core.engine_class",
         "documentation": {}
     },
@@ -293,10 +301,10 @@
     {
         "label": "RunTime",
         "kind": 6,
-        "importPath": "framework.core.runtime",
-        "description": "framework.core.runtime",
-        "peekOfCode": "class RunTime:\n    \"\"\"\n    The RunTime class is responsible for managing the game loop and rendering the game scene.\n    It initializes the game window, handles events, and updates the game state.\n    \"\"\"\n    def __init__(self, winmanager: Window_Manager) -> None:\n        self.winmanager = winmanager\n    def run(self):\n        while True:\n            for win in self.winmanager.get_all_windows().values():",
-        "detail": "framework.core.runtime",
+        "importPath": "framework.core.runtime_class",
+        "description": "framework.core.runtime_class",
+        "peekOfCode": "class RunTime:\n    \"\"\"\n    The RunTime class is responsible for managing the game loop and rendering the game scene.\n    It initializes the game window, handles events, and updates the game state.\n    \"\"\"\n    def __init__(self, winmanager: \"Window_Manager\", engine: \"Engine\", runtimefile: str) -> None:\n        self.winmanager = winmanager\n    def run(self):\n        while True:\n            for win in self.winmanager.get_all_windows().values():",
+        "detail": "framework.core.runtime_class",
         "documentation": {}
     },
     {
@@ -313,7 +321,7 @@
         "kind": 6,
         "importPath": "framework.core.startup_class",
         "description": "framework.core.startup_class",
-        "peekOfCode": "class StartUp:\n    def __init__(self, engine: \"Engine\") -> None:\n        self.engine = engine\n    def initialize(self):\n        \"\"\"\n        Initialize the game engine.\n        This method should be called before starting the game loop.\n        \"\"\"\n        # Perform any necessary setup here, such as loading resources, initializing subsystems, etc.\n        print(\"Game engine initialized.\")",
+        "peekOfCode": "class StartUp:\n    def __init__(self, engine: \"Engine\", startupfile: str) -> None:\n        self.engine = engine\n        with open(startupfile, \"a+\") as file:\n            exec(file.read())\n    def initialize(self):\n        \"\"\"\n        Initialize the game engine.\n        This method should be called before starting the game loop.\n        \"\"\"",
         "detail": "framework.core.startup_class",
         "documentation": {}
     },
@@ -423,6 +431,15 @@
         "description": "tester",
         "peekOfCode": "ev_handler = Events_Handler()\nwhile True:\n    for win in winmanager.get_all_windows().values():\n        win.renderer.fill((0, 0, 0))\n    winmanager.get_window(\"Test_Window\")[1].renderer.render_scene(scene)\n    obj1.components.Velocity_Component.x += 0.25\n    obj1.components.Velocity_Component.y += 0.25\n    obj1.components.CFrame_Component.x += obj1.components.Velocity_Component.x\n    obj1.components.CFrame_Component.y += obj1.components.Velocity_Component.y\n    obj2.components.CFrame_Component.x += 1",
         "detail": "tester",
+        "documentation": {}
+    },
+    {
+        "label": "engine",
+        "kind": 5,
+        "importPath": "tester2",
+        "description": "tester2",
+        "peekOfCode": "engine = Engine(startupfile=\"C:\\\\Users\\\\Henry Watts\\\\UserDocuments\\\\Github\\\\Pygame Framework\\\\startup.py\", runtimefile=\"runtime.py\")\nengine.play()",
+        "detail": "tester2",
         "documentation": {}
     }
 ]
