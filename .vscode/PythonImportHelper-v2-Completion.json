@@ -48,6 +48,14 @@
         "documentation": {}
     },
     {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "Tuple",
         "importPath": "typing",
         "description": "typing",
@@ -121,6 +129,14 @@
         "documentation": {}
     },
     {
+        "label": "Window_Manager",
+        "importPath": "framework.windows.window_manager",
+        "description": "framework.windows.window_manager",
+        "isExtraImport": true,
+        "detail": "framework.windows.window_manager",
+        "documentation": {}
+    },
+    {
         "label": "pygame,",
         "kind": 6,
         "isExtraImport": true,
@@ -130,35 +146,43 @@
         "documentation": {}
     },
     {
-        "label": "Game_Object",
-        "importPath": "framework.game_object.game_object",
-        "description": "framework.game_object.game_object",
-        "isExtraImport": true,
-        "detail": "framework.game_object.game_object",
-        "documentation": {}
-    },
-    {
-        "label": "Game_Object",
-        "importPath": "framework.game_object.game_object",
-        "description": "framework.game_object.game_object",
-        "isExtraImport": true,
-        "detail": "framework.game_object.game_object",
-        "documentation": {}
-    },
-    {
-        "label": "Game_Object",
-        "importPath": "framework.game_object.game_object",
-        "description": "framework.game_object.game_object",
-        "isExtraImport": true,
-        "detail": "framework.game_object.game_object",
-        "documentation": {}
-    },
-    {
         "label": "*",
         "importPath": "framework.components",
         "description": "framework.components",
         "isExtraImport": true,
         "detail": "framework.components",
+        "documentation": {}
+    },
+    {
+        "label": "Game_Object",
+        "importPath": "framework.game_object.game_object",
+        "description": "framework.game_object.game_object",
+        "isExtraImport": true,
+        "detail": "framework.game_object.game_object",
+        "documentation": {}
+    },
+    {
+        "label": "Game_Object",
+        "importPath": "framework.game_object.game_object",
+        "description": "framework.game_object.game_object",
+        "isExtraImport": true,
+        "detail": "framework.game_object.game_object",
+        "documentation": {}
+    },
+    {
+        "label": "Game_Object",
+        "importPath": "framework.game_object.game_object",
+        "description": "framework.game_object.game_object",
+        "isExtraImport": true,
+        "detail": "framework.game_object.game_object",
+        "documentation": {}
+    },
+    {
+        "label": "Window",
+        "importPath": "framework.windows.window",
+        "description": "framework.windows.window",
+        "isExtraImport": true,
+        "detail": "framework.windows.window",
         "documentation": {}
     },
     {
@@ -179,10 +203,26 @@
     },
     {
         "label": "Scene",
-        "importPath": "framework.core.scene",
-        "description": "framework.core.scene",
+        "importPath": "framework.scenes.scene",
+        "description": "framework.scenes.scene",
         "isExtraImport": true,
-        "detail": "framework.core.scene",
+        "detail": "framework.scenes.scene",
+        "documentation": {}
+    },
+    {
+        "label": "Scene",
+        "importPath": "framework.scenes.scene",
+        "description": "framework.scenes.scene",
+        "isExtraImport": true,
+        "detail": "framework.scenes.scene",
+        "documentation": {}
+    },
+    {
+        "label": "Events_Handler",
+        "importPath": "framework.core.events_handler",
+        "description": "framework.core.events_handler",
+        "isExtraImport": true,
+        "detail": "framework.core.events_handler",
         "documentation": {}
     },
     {
@@ -285,7 +325,7 @@
         "kind": 6,
         "importPath": "framework.core.engine_class",
         "description": "framework.core.engine_class",
-        "peekOfCode": "class Engine:\n    def __init__(self, startupfile: str, runtimefile: str) -> None:\n        self.startup = StartUp(engine=self, startupfile=startupfile)\n        #self.runtime = RunTime(engine=self, runtimefile=runtimefile)\n    def play(self):\n        \"\"\"\n        Starts the game engine by initializing the startup process and running the runtime loop.\n        \"\"\"\n        self.startup.initialize()\n        #self.runtime.run()",
+        "peekOfCode": "class Engine:\n    def __init__(self, startupfile: str, runtimefile: str) -> None:\n        self.WINDOW_MANAGER: \"Window_Manager\"\n        self.EVENTS_HANDLER: \"Events_Handler\"\n        self.startup = StartUp(engine=self, startupfile=startupfile)\n        self.runtime = RunTime(engine=self, runtimefile=runtimefile)\n    def play(self):\n        \"\"\"\n        Starts the game engine by initializing the startup process and running the runtime loop.\n        \"\"\"",
         "detail": "framework.core.engine_class",
         "documentation": {}
     },
@@ -303,17 +343,8 @@
         "kind": 6,
         "importPath": "framework.core.runtime_class",
         "description": "framework.core.runtime_class",
-        "peekOfCode": "class RunTime:\n    \"\"\"\n    The RunTime class is responsible for managing the game loop and rendering the game scene.\n    It initializes the game window, handles events, and updates the game state.\n    \"\"\"\n    def __init__(self, winmanager: \"Window_Manager\", engine: \"Engine\", runtimefile: str) -> None:\n        self.winmanager = winmanager\n    def run(self):\n        while True:\n            for win in self.winmanager.get_all_windows().values():",
+        "peekOfCode": "class RunTime:\n    \"\"\"\n    The RunTime class is responsible for managing the game loop and rendering the game scene.\n    It initializes the game window, handles events, and updates the game state.\n    \"\"\"\n    def __init__(self, engine: \"Engine\", runtimefile: str) -> None:\n        self.engine = engine\n        self.runtimefile = runtimefile\n        self.sandbox = {}\n        exec(open(self.runtimefile, \"r\").read(), self.sandbox)",
         "detail": "framework.core.runtime_class",
-        "documentation": {}
-    },
-    {
-        "label": "Scene",
-        "kind": 6,
-        "importPath": "framework.core.scene",
-        "description": "framework.core.scene",
-        "peekOfCode": "class Scene:\n    def __init__(self, name: str) -> None:\n        from framework.containers.object_container import ObjectContainer\n        self.name = name\n        self.contents = ObjectContainer()\n    def add_object(self, game_object: 'Game_Object') -> None:\n        \"\"\"Adds a game object to the scene.\"\"\"\n        self.contents.__setattr__(game_object.name, game_object)",
-        "detail": "framework.core.scene",
         "documentation": {}
     },
     {
@@ -321,7 +352,7 @@
         "kind": 6,
         "importPath": "framework.core.startup_class",
         "description": "framework.core.startup_class",
-        "peekOfCode": "class StartUp:\n    def __init__(self, engine: \"Engine\", startupfile: str) -> None:\n        self.engine = engine\n        with open(startupfile, \"a+\") as file:\n            exec(file.read())\n    def initialize(self):\n        \"\"\"\n        Initialize the game engine.\n        This method should be called before starting the game loop.\n        \"\"\"",
+        "peekOfCode": "class StartUp:\n    def __init__(self, engine: \"Engine\", startupfile: str) -> None:\n        self.engine = engine\n        self.startupfile = startupfile\n    def initialize(self):\n        \"\"\"\n        Initialize the game engine.\n        This method should be called before starting the game loop.\n        \"\"\"\n        with open(self.startupfile, \"r+\") as file:",
         "detail": "framework.core.startup_class",
         "documentation": {}
     },
@@ -341,6 +372,15 @@
         "description": "framework.renderers.renderer",
         "peekOfCode": "class Renderer:\n    def __init__(self, window: \"Window\") -> None:\n        self.window = window\n    def fill(self, color: tuple[int, int, int]) -> None:\n        self.window.pgwindow.get_surface().fill(color)\n    def update(self) -> None:\n        self.window.pgwindow.flip()\n    def render_scene(self, scene: \"Scene\") -> None:\n        for game_object in scene.contents.__dict__.values():\n            game_object.components.__dict__[\"Image_Component\"].render(self.window.pgwindow.get_surface())",
         "detail": "framework.renderers.renderer",
+        "documentation": {}
+    },
+    {
+        "label": "Scene",
+        "kind": 6,
+        "importPath": "framework.scenes.scene",
+        "description": "framework.scenes.scene",
+        "peekOfCode": "class Scene:\n    def __init__(self, name: str) -> None:\n        from framework.containers.object_container import ObjectContainer\n        self.name = name\n        self.contents = ObjectContainer()\n    def add_object(self, game_object: 'Game_Object') -> None:\n        \"\"\"Adds a game object to the scene.\"\"\"\n        self.contents.__setattr__(game_object.name, game_object)",
+        "detail": "framework.scenes.scene",
         "documentation": {}
     },
     {
@@ -368,6 +408,87 @@
         "description": "framework.windows.window_manager",
         "peekOfCode": "class Window_Manager:\n    def __init__(self):\n        from framework.containers.object_container import ObjectContainer\n        self.windows = ObjectContainer()\n    def add_window(self, window: 'Window') -> None:\n        setattr(self.windows, window.title, window)\n    def remove_window(self, title: str) -> None:\n        if hasattr(self.windows, title):\n            delattr(self.windows, title)\n    def get_window(self, title: str) -> tuple[bool, Window | None]:",
         "detail": "framework.windows.window_manager",
+        "documentation": {}
+    },
+    {
+        "label": "logic",
+        "kind": 2,
+        "importPath": "runtime",
+        "description": "runtime",
+        "peekOfCode": "def logic():\n    \"\"\"\n    This function contains the game logic that will be executed in each frame.\n    It can be used to update game objects, handle events, and manage the game state.\n    \"\"\"\n    pass",
+        "detail": "runtime",
+        "documentation": {}
+    },
+    {
+        "label": "engine",
+        "kind": 5,
+        "importPath": "startup",
+        "description": "startup",
+        "peekOfCode": "engine = self.engine\nimport pygame\nfrom framework.windows.window_manager import Window_Manager\nfrom framework.windows.window import Window\nfrom framework.scenes.scene import Scene\nfrom framework.core.events_handler import Events_Handler\nfrom framework.game_object.game_object import Game_Object\nengine.clock = pygame.time.Clock()\nengine.WINDOW_MANAGER = Window_Manager()\nengine.WINDOW_MANAGER.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))",
+        "detail": "startup",
+        "documentation": {}
+    },
+    {
+        "label": "engine.clock",
+        "kind": 5,
+        "importPath": "startup",
+        "description": "startup",
+        "peekOfCode": "engine.clock = pygame.time.Clock()\nengine.WINDOW_MANAGER = Window_Manager()\nengine.WINDOW_MANAGER.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nengine.obj1 = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) | Velocity_Component() |\")\nengine.obj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nengine.scene = Scene(\"Scene 1\")\nengine.scene.add_object(engine.obj1)\nengine.scene.add_object(engine.obj2)\nengine.EVENTS_HANDLER = Events_Handler()",
+        "detail": "startup",
+        "documentation": {}
+    },
+    {
+        "label": "engine.WINDOW_MANAGER",
+        "kind": 5,
+        "importPath": "startup",
+        "description": "startup",
+        "peekOfCode": "engine.WINDOW_MANAGER = Window_Manager()\nengine.WINDOW_MANAGER.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nengine.obj1 = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) | Velocity_Component() |\")\nengine.obj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nengine.scene = Scene(\"Scene 1\")\nengine.scene.add_object(engine.obj1)\nengine.scene.add_object(engine.obj2)\nengine.EVENTS_HANDLER = Events_Handler()",
+        "detail": "startup",
+        "documentation": {}
+    },
+    {
+        "label": "engine.WINDOW_MANAGER.add_window(window",
+        "kind": 5,
+        "importPath": "startup",
+        "description": "startup",
+        "peekOfCode": "engine.WINDOW_MANAGER.add_window(window = Window(title=\"Test_Window\", size=(800, 600), position=(100, 100)))\nengine.obj1 = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) | Velocity_Component() |\")\nengine.obj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nengine.scene = Scene(\"Scene 1\")\nengine.scene.add_object(engine.obj1)\nengine.scene.add_object(engine.obj2)\nengine.EVENTS_HANDLER = Events_Handler()",
+        "detail": "startup",
+        "documentation": {}
+    },
+    {
+        "label": "engine.obj1",
+        "kind": 5,
+        "importPath": "startup",
+        "description": "startup",
+        "peekOfCode": "engine.obj1 = Game_Object(name=\"Test_Object\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self) | Velocity_Component() |\")\nengine.obj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nengine.scene = Scene(\"Scene 1\")\nengine.scene.add_object(engine.obj1)\nengine.scene.add_object(engine.obj2)\nengine.EVENTS_HANDLER = Events_Handler()",
+        "detail": "startup",
+        "documentation": {}
+    },
+    {
+        "label": "engine.obj2",
+        "kind": 5,
+        "importPath": "startup",
+        "description": "startup",
+        "peekOfCode": "engine.obj2 = Game_Object(name=\"Test_Object2\", components = \"Image_Component(image_path='image.png', game_object=self) | CFrame_Component(game_object=self, position=Vector2(200, 200)) |\")\nengine.scene = Scene(\"Scene 1\")\nengine.scene.add_object(engine.obj1)\nengine.scene.add_object(engine.obj2)\nengine.EVENTS_HANDLER = Events_Handler()",
+        "detail": "startup",
+        "documentation": {}
+    },
+    {
+        "label": "engine.scene",
+        "kind": 5,
+        "importPath": "startup",
+        "description": "startup",
+        "peekOfCode": "engine.scene = Scene(\"Scene 1\")\nengine.scene.add_object(engine.obj1)\nengine.scene.add_object(engine.obj2)\nengine.EVENTS_HANDLER = Events_Handler()",
+        "detail": "startup",
+        "documentation": {}
+    },
+    {
+        "label": "engine.EVENTS_HANDLER",
+        "kind": 5,
+        "importPath": "startup",
+        "description": "startup",
+        "peekOfCode": "engine.EVENTS_HANDLER = Events_Handler()",
+        "detail": "startup",
         "documentation": {}
     },
     {

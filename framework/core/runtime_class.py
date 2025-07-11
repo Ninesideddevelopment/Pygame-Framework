@@ -2,7 +2,6 @@
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from framework.windows.window_manager import Window_Manager
     from framework.core.engine_class import Engine
 
 class RunTime:
@@ -11,10 +10,20 @@ class RunTime:
     It initializes the game window, handles events, and updates the game state.
     """
 
-    def __init__(self, winmanager: "Window_Manager", engine: "Engine", runtimefile: str) -> None:
-        self.winmanager = winmanager
+    def __init__(self, engine: "Engine", runtimefile: str) -> None:
+        self.engine = engine
+        self.runtimefile = runtimefile
+        
+        self.sandbox = {}
+        exec(open(self.runtimefile, "r").read(), self.sandbox)
 
-    def run(self):
+    def run(self) -> None:
         while True:
-            for win in self.winmanager.get_all_windows().values():
+            for win in self.engine.WINDOW_MANAGER.get_all_windows().values():
                 win.renderer.fill((0, 0, 0))
+
+                self.sandbox["logic"]()
+
+            self.engine.EVENTS_HANDLER.handle_events(self.engine.WINDOW_MANAGER,
+                                                    flags="WINDOWCLOSE | QUIT")
+

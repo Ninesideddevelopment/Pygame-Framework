@@ -7,13 +7,13 @@ if TYPE_CHECKING:
 class StartUp:
     def __init__(self, engine: "Engine", startupfile: str) -> None:
         self.engine = engine
-        with open(startupfile, "a+") as file:
-            exec(file.read())
+        self.startupfile = startupfile
 
     def initialize(self):
         """
         Initialize the game engine.
         This method should be called before starting the game loop.
         """
-        # Perform any necessary setup here, such as loading resources, initializing subsystems, etc.
+        with open(self.startupfile, "r+") as file:
+            exec(file.read())
         print("Game engine initialized.")
